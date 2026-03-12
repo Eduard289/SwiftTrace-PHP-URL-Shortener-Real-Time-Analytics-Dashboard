@@ -1,0 +1,12 @@
+# Activar el motor de reescritura de Apache
+RewriteEngine On
+
+# 1. Si la petición es un archivo que ya existe (ej: index.php, style.css), no hacer nada
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# 2. Si la petición es un directorio que ya existe (ej: assets/), no hacer nada
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# 3. Si es cualquier otra cosa (ej: tuweb.com/abc), capturarla y mandarla a redirect.php
+# Solo aceptamos letras minúsculas, mayúsculas, números, guiones y guiones bajos
+RewriteRule ^([a-zA-Z0-9_-]+)$ redirect.php?code=$1 [QSA,L]
